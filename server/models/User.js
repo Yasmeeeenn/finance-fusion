@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
-const {Loans} = require('./Loan')
+const {Loan} = require('./Loan')
 
 const userSchema = new Schema(
   {
@@ -20,7 +20,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    savedLoans: [Loans],
+    savedLoans: {
+      type: [Loan], 
+      required: false,
+    },
   },
   {
     toJSON: {
@@ -42,7 +45,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-userSchema.virtual('savedLoans').get(function () {
+userSchema.virtual('numberOfLoans').get(function () {
   return this.savedLoans.length;
 });
 
