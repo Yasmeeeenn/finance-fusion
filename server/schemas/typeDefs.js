@@ -1,28 +1,42 @@
 const typeDefs = `
-  type Thought {
+  type User {
     _id: ID
-    thoughtText: String
-    thoughtAuthor: String
-    createdAt: String
-    comments: [Comment]!
+    username: String
+    email: String
+    password: String
+    loanCount: Int
+    savedLoans: [Loan]!  
   }
 
-  type Comment {
+  type Loan {
     _id: ID
-    commentText: String
+    totalLoanAmount: Int!
+    loanTerm: Int!
+    interestRate: Int!
+    totalInterest: Int!
+    loanPrinciple: Int!
+    depositAmount: Int
     createdAt: String
+  }
+
+  type Auth {
+    token: ID!
+    user: User
   }
 
   type Query {
-    thoughts: [Thought]!
-    thought(thoughtId: ID!): Thought
+    loans: [Loan]!
+    loan(loanId: ID!): Loan
+    users: [User]
+    user(userId: ID!): User
+    me: User
   }
 
   type Mutation {
-    addThought(thoughtText: String!, thoughtAuthor: String!): Thought
-    addComment(thoughtId: ID!, commentText: String!): Thought
-    removeThought(thoughtId: ID!): Thought
-    removeComment(thoughtId: ID!, commentId: ID!): Thought
+    login(email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
+    saveLoan(loanId: ID!, totalLoanAmount: Int!, loanTerm: Int!, interest: Int!, loanPrinciple: Int!, depositAmount: Int, createdAt: String): Loan
+    removeLoan(loanId: ID!): Loan
   }
 `;
 
