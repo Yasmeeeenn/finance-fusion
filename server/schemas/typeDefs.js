@@ -12,9 +12,11 @@ const typeDefs = `
     _id: ID
     totalLoanAmount: Int!
     loanTerm: Int!
-    interest: Int!
+    interestRate: Int!
+    totalInterest: Int!
     loanPrinciple: Int!
     depositAmount: Int
+    createdAt: String
   }
 
   type Auth {
