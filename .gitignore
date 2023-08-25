@@ -26,7 +26,7 @@ yarn-error.log*
 server/node_modules
 client/node_modules
 
+package-lock.json
 pnpm-lock.yaml
-
 server/package-lock.json
 client/package-lock.json
