@@ -4,18 +4,18 @@ const typeDefs = `
     username: String
     email: String
     password: String
-    loanCount: Int
-    savedLoans: [Loan]!  
+    loanCount: Number
+    savedLoans: [Loan]  
   }
 
   type Loan {
     _id: ID
-    totalLoanAmount: Int!
-    loanTerm: Int!
-    interestRate: Int!
-    totalInterest: Int!
-    loanPrinciple: Int!
-    depositAmount: Int
+    totalLoanAmount: Number!
+    loanTerm: Number!
+    interestRate: Number!
+    totalInterest: Number!
+    loanPrinciple: Number!
+    depositAmount: Number
     createdAt: String
   }
 

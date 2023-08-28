@@ -3,27 +3,27 @@ const dateFormat = require('../utils/dateFormat');
 
 const loanSchema = new Schema({
   totalLoanAmount: {
-    type: Int,
+    type: Number,
     required: 'There has to be a total loan amount!',
   },
   loanTerm: {
-    type: Int,
+    type: Number,
     required: true,
   },
   interestRate: {
-    type: Int,
+    type: Number,
     required: true,
   },
   totalInterest: {
-    type: Int,
+    type: Number,
     required: true,
   },
   loanPrinciple: {
-    type: Int,
+    type: Number,
     required: true,
   },
   depositAmount: {
-    type: Int,
+    type: Number,
     required: true,
   },
   createdAt: {
