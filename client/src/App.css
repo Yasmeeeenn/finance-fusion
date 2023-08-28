@@ -57,7 +57,7 @@ hr {
  * 2. Correct the odd `em` font sizing in all browsers.
  */
 pre {
-  font-family: monospace, monospace;
+  font-family: Courier, Courier;
   /* 1 */
   font-size: 1em;
   /* 2 */
@@ -100,7 +100,7 @@ strong {
 code,
 kbd,
 samp {
-  font-family: monospace, monospace;
+  font-family: Courier,Courier;
   /* 1 */
   font-size: 1em;
   /* 2 */
@@ -920,7 +920,7 @@ a:hover {
 
 /* BACKGROUND UTILS */
 .bg-primary {
-  background-color: #2d3e50 !important;
+  background-color: #3aa02F !important;
 }
 
 .bg-info {
@@ -948,7 +948,7 @@ a:hover {
 }
 
 .bg-link {
-  background-color: #1b89bc !important;
+  background-color: #3aa02F!important;
 }
 
 /* DISPLAY */
@@ -1012,12 +1012,12 @@ a:hover {
 }
 
 .btn.btn-primary {
-  background-color: #2d3e50;
+  background-color: #60b125;
   color: #d9e9e8;
 }
 
 .btn.btn-primary:hover {
-  background-color: #57779a;
+  background-color: #d5c77b;
 }
 
 .btn.btn-danger {
@@ -1048,7 +1048,7 @@ a:hover {
 }
 
 .btn.btn-dark {
-  background-color: #1a1a1a;
+  background-color: #1a1a1ae7;
   color: #d9e9e8;
 }
 
