@@ -24,7 +24,7 @@ const Footer = () => {
           >
             💰
           </span>{' '}
-          BYTEQ.
+          FRIENDS
         </h4>
       </div>
     </footer>
