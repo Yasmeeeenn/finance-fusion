@@ -1,41 +1,58 @@
-const { Thought } = require('../models');
+const { Loan } = require('../models');
+const { User } = require('../models');
+const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    thoughts: async () => {
-      return Thought.find().sort({ createdAt: -1 });
+    users: async () => {
+      return User.find();
     },
-
-    thought: async (parent, { thoughtId }) => {
-      return Thought.findOne({ _id: thoughtId });
+    loans: async () => {
+      return Loan.find();
     },
+    
+    user: async (parent, {userId}) => {
+        console.log(`Requested User ID => `+ userId)
+      return User.findOne({ _id: userId })
+      .select('-__v')
+      .populate('savedBooks');
+    },
+    me: async (parent, args, context) => {
+        if (context.user) {
+          return User.findOne({ _id: context.user._id }).populate('savedBooks');
+        }
+        throw AuthenticationError;
+      },
   },
 
   Mutation: {
-    addThought: async (parent, { thoughtText, thoughtAuthor }) => {
-      return Thought.create({ thoughtText, thoughtAuthor });
+    addUser: async (parent, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
+      const token = signToken(user);
+      return { token, user };
     },
-    addComment: async (parent, { thoughtId, commentText }) => {
-      return Thought.findOneAndUpdate(
-        { _id: thoughtId },
-        {
-          $addToSet: { comments: { commentText } },
-        },
-        {
-          new: true,
-          runValidators: true,
-        }
-      );
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        throw AuthenticationError;
+      }
+
+      const correctPw = await user.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw AuthenticationError;
+      }
+
+      const token = signToken(user);
+
+      return { token, user };
     },
-    removeThought: async (parent, { thoughtId }) => {
-      return Thought.findOneAndDelete({ _id: thoughtId });
+    saveLoan: async (parent, { loanId, totalLoanAmount, loanTerm, interest, loanPrinciple, depositAmount, createdAt }) => {
+      return Loan.create({ loanId, totalLoanAmount, loanTerm, interest, loanPrinciple, depositAmount, createdAt });
     },
-    removeComment: async (parent, { thoughtId, commentId }) => {
-      return Thought.findOneAndUpdate(
-        { _id: thoughtId },
-        { $pull: { comments: { _id: commentId } } },
-        { new: true }
-      );
+    removeLoan: async (parent, { loanId }) => {
+      return Loan.findOneAndDelete({ _id: loanId });
     },
   },
 };
