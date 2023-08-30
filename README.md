@@ -2,7 +2,7 @@
 
     
 ## Description
-Finance Fusion is a powerful and user-friendly loan calculation application designed to provide individuals and businesses with an efficient tool for accurately calculating various aspects of loans. Whether you're planning a major purchase, comparing financing options, or analyzing the financial implications of different loan terms, LoanCalc Pro has you covered.
+Finance Fusion is a powerful and user-friendly loan calculation application designed to provide individuals and businesses with an efficient tool for accurately calculating various aspects of loans. Whether you're planning a major purchase, comparing financing options, or analyzing the financial implications of different loan terms, Finance Fusion has you covered.
 
 ## Table of Contents
 [Installation](#installation)
@@ -16,15 +16,15 @@ Finance Fusion is a powerful and user-friendly loan calculation application desi
 To install the Finance Fusion application, follow these steps:
 
 1. Open your terminal.
-2. Navigate to the project's root directory.
-3. Run the command npm install to install the necessary dependencies.
+2. Navigate to the application's root directory.
+3. Run the command 'npm install' to install the necessary dependencies.
 
 ## Usage
 To use the Finance Fusion application:
 
-1. In your terminal, run the command npm start to start the application.
+1. In your terminal, run the command 'npm start' to start the application.
 2. The application will launch in your default web browser.
-3. You'll be presented with a user interface where you can input loan details and perform various loan      calculations.
+3. You'll be presented with a user interface where you can input loan details and perform various loan calculations.
 
 ## License
 This project is under the MIT license.
