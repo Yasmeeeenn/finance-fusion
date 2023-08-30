@@ -45,7 +45,15 @@ At the moment, we are actively enhancing the Finance Fusion application and expl
 ## Questions
 If you have any questions or would like to know more about Finance Fusion, you can reach out through the following channels:
  
-GitHub: https://github.com/yasmeeeenn
-Email: yasnguyen6@gmail.com
+GGitHub: [Kyla](https://github.com/Kdubb219)
+
+GitHub: [Yasmeen](https://github.com/yasmeeeenn) 
+
+GitHub: [Tae](https://github.com/afrazier01)
+
+GitHub: [Barron](https://github.com/UtuRaiden)
+
+GitHub: [Quinten](https://github.com/qdog78)
+
 
 
