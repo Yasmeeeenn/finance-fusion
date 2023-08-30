@@ -6,10 +6,15 @@ Finance Fusion is a powerful and user-friendly loan calculation application desi
 
 ## Table of Contents
 [Installation](#installation)
+
 [Usage](#usage)
+
 [License](#license)
+
 [Contribution](#contribution)
+
 [Test](#tests)
+
 [Questions](#questions)
 
 ## Installation
