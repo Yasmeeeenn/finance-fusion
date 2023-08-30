@@ -1,32 +1,70 @@
 import { gql } from '@apollo/client';
 
-export const ADD_THOUGHT = gql`
-  mutation addThought($thoughtText: String!, $thoughtAuthor: String!) {
-    addThought(thoughtText: $thoughtText, thoughtAuthor: $thoughtAuthor) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
+export const LOGIN_USER = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      user {
         _id
-        commentText
+        username
       }
     }
   }
 `;
 
-export const ADD_COMMENT = gql`
-  mutation addComment($thoughtId: ID!, $commentText: String!) {
-    addComment(thoughtId: $thoughtId, commentText: $commentText) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
+export const ADD_USER = gql`
+  mutation addUser($username: String!, $email: String!, $password: String!) {
+    addUser(username: $username, email: $email, password: $password) {
+      token
+      user {
         _id
-        commentText
-        createdAt
+        username
       }
     }
   }
+`;
+//edit
+export const SAVE_LOAN = gql`
+mutation saveLoan($totalInterest: Float!, $totalLoanAmount: Float!, $loanTerm: Int!, $interestRate: Float!, $loanPrinciple: Float!, $depositAmount: Float!, $createdAt: String) {
+ saveLoan(totalInterest: $totalInterest, totalLoanAmount: $totalLoanAmount, loanTerm: $loanTerm, interestRate: $interestRate, loanPrinciple: $loanPrinciple, depositAmount: $depositAmount, createdAt: $createdAt) {
+   username
+   savedLoans {
+        totalLoanAmount
+        totalInterest
+        loanPrinciple
+        loanTerm
+        depositAmount
+        interestRate
+        createdAt
+        _id
+      }
+      loanCount
+      email
+      _id
+    }
+  }
+}
+`;
+
+//edit
+export const REMOVE_LOAN = gql`
+mutation RemoveLoan($loanId: ID!) {
+  removeLoan(loanId: $loanId) {
+    username
+    savedLoans {
+      totalLoanAmount
+      totalInterest
+      loanTerm
+      interestRate
+      loanPrinciple
+      depositAmount
+      createdAt
+      _id
+    }
+      loanCount
+      email
+      _id
+    }
+  }
+}
 `;
