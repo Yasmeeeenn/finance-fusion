@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import App from './App.jsx'
 import Home from './pages/Home'
-import SingleThought from './pages/SingleThought'
+import LoginPage from './pages/LoginPage.jsx'
 import Error from './pages/Error'
 
 const router = createBrowserRouter([
@@ -16,9 +16,10 @@ const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
+
       {
-        path: '/thoughts/:thoughtId',
-        element: <SingleThought />,
+        path: '/login',
+        element: <LoginPage />,
       },
     ],
   },
