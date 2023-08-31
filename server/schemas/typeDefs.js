@@ -15,6 +15,8 @@ const typeDefs = `
     interestRate: Float!
     totalInterest: Float!
     loanPrinciple: Float!
+
+    monthlyPayment: Float!
     depositAmount: Float
     createdAt: String
   }
@@ -35,7 +37,8 @@ const typeDefs = `
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    saveLoan(loanId: ID!, totalLoanAmount: Int!, loanTerm: Int!, interest: Int!, loanPrinciple: Int!, depositAmount: Int, createdAt: String): Loan
+
+    saveLoan(loanId: ID!, totalLoanAmount: Int!, loanTerm: Int!, monthlyPayment: Int!, interest: Int!, loanPrinciple: Int!, depositAmount: Int, createdAt: String): Loan
     removeLoan(loanId: ID!): Loan
   }
 `;
