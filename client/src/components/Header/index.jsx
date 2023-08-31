@@ -8,6 +8,7 @@ const Header = () => {
           <h1 className="m-0">Finance Fusion</h1>
         </Link>
         <p className="m-0">Money is the root of all success!!!</p>
+        <Link to="/login">Login</Link>
       </div>
     </header>
   );
