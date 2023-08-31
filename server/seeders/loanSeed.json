@@ -28,5 +28,11 @@
     "interestRate": 3.5,
     "loanPrinciple": 175000,
     "depositAmount": 2083
+  },
+  {
+    "loanTerm": 12,
+    "interestRate": 5,
+    "loanPrinciple": 500000,
+    "depositAmount": 0
   }
 ]
