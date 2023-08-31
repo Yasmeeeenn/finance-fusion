@@ -48,8 +48,8 @@ const resolvers = {
 
       return { token, user };
     },
-    saveLoan: async (parent, { loanId, totalLoanAmount, loanTerm, interest, loanPrinciple, depositAmount, createdAt }) => {
-      return Loan.create({ loanId, totalLoanAmount, loanTerm, interest, loanPrinciple, depositAmount, createdAt });
+    saveLoan: async (parent, {loanTerm, interest, loanPrinciple, depositAmount, createdAt }) => {
+      return Loan.create({totalLoanAmount, loanTerm, interest, loanPrinciple, depositAmount, createdAt, monthlyPayment });
     },
     removeLoan: async (parent, { loanId }) => {
       return Loan.findOneAndDelete({ _id: loanId });
