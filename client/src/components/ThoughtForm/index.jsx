@@ -1,5 +1,4 @@
-
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 
 import { ADD_THOUGHT } from '../../utils/mutations';
@@ -7,16 +6,18 @@ import { QUERY_THOUGHTS } from '../../utils/queries';
 
 const ThoughtForm = () => {
   const [formState, setFormState] = useState({
-    thoughtText: '',
-    thoughtAuthor: '',
+    loanTitle: '',
+    loanAmount: '',
+    interestRate: '',
+    downPayment: '',
+    loanMonths: '',
+    monthlyPayments: '',
+    totalAmount: '',
   });
   const [characterCount, setCharacterCount] = useState(0);
 
   const [addThought, { error }] = useMutation(ADD_THOUGHT, {
-    refetchQueries: [
-      QUERY_THOUGHTS,
-      'getThoughts'
-    ]
+    refetchQueries: [QUERY_THOUGHTS, 'getThoughts'],
   });
 
   const handleFormSubmit = async (event) => {
@@ -28,8 +29,13 @@ const ThoughtForm = () => {
       });
 
       setFormState({
-        thoughtText: '',
-        thoughtAuthor: '',
+        loanTitle: '',
+        loanAmount: '',
+        interestRate: '',
+        downPayment: '',
+        loanMonths: '',
+        monthlyPayments: '',
+        totalAmount: '',
       });
     } catch (err) {
       console.error(err);
@@ -39,53 +45,99 @@ const ThoughtForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'thoughtText' && value.length <= 280) {
-      setFormState({ ...formState, [name]: value });
-      setCharacterCount(value.length);
-    } else if (name !== 'thoughtText') {
-      setFormState({ ...formState, [name]: value });
+    if (name === 'loanAmount' || name === 'interestRate') {
+      // Handle calculations for monthlyPayments and totalAmount
+      // You need to implement the calculation logic here
     }
+
+    setFormState({ ...formState, [name]: value });
   };
 
   return (
     <div>
-      <h3 >What's bothering your wallet?</h3>
+      <h3>Loan Calculator</h3>
 
       <p
         className={`m-0 ${
           characterCount === 280 || error ? 'text-danger' : ''
         }`}
-      >
+      > 
         Character Count: {characterCount}/280
         {error && <span className="ml-2">That's not going to work!</span>}
-      </p>
+      </p> Title
       <form
         className="flex-row justify-center justify-space-between-md align-center"
         onSubmit={handleFormSubmit}
-      >
-        <div className="col-12">
-          <textarea
-            name="thoughtText"
-            placeholder="New Financial Problem....."
-            value={formState.thoughtText}
-            className="form-input w-100"
-            style={{ lineHeight: '1.5' }}
-            onChange={handleChange}
-          ></textarea>
-        </div>
-        <div className="col-12 col-lg-9">
+      > 
+        <div className="col-12"> 
           <input
-            name="thoughtAuthor"
-            placeholder="Place your name here"
-            value={formState.thoughtAuthor}
+            name="loanTitle"
+            placeholder="Title of Loan"
+            value={formState.loanTitle}
             className="form-input w-100"
             onChange={handleChange}
           />
         </div>
-
-        <div className="col-12 col-lg-3">
+        <div className="col-12"> Amount
+          <input
+            name="loanAmount"
+            placeholder="Loan Amount"
+            value={formState.loanAmount}
+            className="form-input w-100"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="col-12"> Interest Rate
+          <input
+            name="interestRate"
+            placeholder="Interest Rate"
+            value={formState.interestRate}
+            className="form-input w-100"
+            onChange={handleChange}
+          /> Down Payment
+        </div>
+        <div className="col-12">
+          
+          <input
+            name="downPayment"
+            placeholder="Down Payment"
+            value={formState.downPayment}
+            className="form-input w-100"
+            onChange={handleChange}
+          /> Duration of Loan
+        </div>
+        <div className="col-12">
+          <input
+            name="loanMonths"
+            placeholder="Months"
+            value={formState.loanMonths}
+            className="form-input w-100"
+            onChange={handleChange}
+          />
+          Payments
+        </div>
+        <div className="col-12">
+          <input
+            name="monthlyPayments"
+            placeholder="Payments"
+            value={formState.monthlyPayments}
+            className="form-input w-100"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="col-12">
+          Amount that will be paid
+          <input
+            name="totalAmount"
+            placeholder="Total Amount"
+            value={formState.totalAmount}
+            className="form-input w-100"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="col-12">
           <button className="btn btn-primary btn-block py-3" type="submit">
-           ENTER
+            CALCULATE
           </button>
         </div>
         {error && (

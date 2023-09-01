@@ -23,7 +23,7 @@ const LoginPage = () => {
   
     return (
       <div className="login-page">
-        <h2>Login Page</h2>
+        <h2>Login</h2>
         {loggedIn ? (
           <p>You are logged in.</p>
         ) : (
@@ -40,8 +40,12 @@ const LoginPage = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+loginpage
           <button onClick={handleLogin}>Login</button>
           <Link to="/signup" className='centeredlink'>Sign Up</Link>
+=======
+          <button onClick={handleLogin}></button>
+dev
         </div>
       )}
     </div>
