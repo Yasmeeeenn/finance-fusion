@@ -1,27 +1,21 @@
 import { gql } from '@apollo/client';
 
-export const QUERY_THOUGHTS = gql`
-  query getThoughts {
-    thoughts {
+export const GET_ME = gql`
+  query me {
+    me {
       _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-    }
-  }
-`;
-
-export const QUERY_SINGLE_THOUGHT = gql`
-  query getSingleThought($thoughtId: ID!) {
-    thought(thoughtId: $thoughtId) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
+      username
+      email
+      bookCount
+      savedLoans {
+        totalLoanAmount
+        totalInterest
+        loanTerm
+        loanPrinciple
+        interestRate
+        depositAmount
         createdAt
+        _id
       }
     }
   }
