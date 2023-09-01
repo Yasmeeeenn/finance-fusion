@@ -14,6 +14,8 @@ const server = new ApolloServer({
   resolvers,
 });
 
+app.use('/fonts',express.static(path.join(__dirname, 'fonts')));
+
 const startApolloServer = async () => {
   await server.start();
 
