@@ -6,12 +6,15 @@ import Home from './pages/Home'
 import LoginPage from './pages/LoginPage.jsx'
 import Error from './pages/Error'
 
+import BorderComponent from './components/Border';
 import './font.css';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: (<BorderComponent>
+      <App />
+      </BorderComponent>),
     errorElement: <Error />,
     children: [
       {
