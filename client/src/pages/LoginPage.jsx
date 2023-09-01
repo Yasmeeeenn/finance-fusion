@@ -1,25 +1,18 @@
 import React, { useState} from 'react';
-import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import LOGIN_MUTATION from '../utils/mutations';
 import '../styles.css';
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loggedIn, setLoggedIn] = useState(false);
-    const [login, { loading, error }] = useMutation(LOGIN_MUTATION, {
-        variables: { username, password },
-        onCompleted: (data) => {
-          console.log('Login successful');
-          // Handle token storage and user redirection here
-        },
-      });
-
+  
     const handleLogin = () => {
-    login();
+      // You can add your authentication logic here
+      // For simplicity, we'll just check if the username and password are both "admin"
+      if (username === 'admin' && password === 'admin') {
+        setLoggedIn(true);
+      }
     };
-    
   
     return (
       <div className="login-page">
@@ -40,12 +33,7 @@ const LoginPage = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-loginpage
-          <button onClick={handleLogin}>Login</button>
-          <Link to="/signup" className='centeredlink'>Sign Up</Link>
-=======
           <button onClick={handleLogin}></button>
-dev
         </div>
       )}
     </div>
