@@ -14,6 +14,8 @@ const server = new ApolloServer({
   resolvers,
 });
 
+app.use('/fonts',express.static(path.join(__dirname, 'fonts')));
+
 const startApolloServer = async () => {
   await server.start();
 
@@ -31,7 +33,7 @@ const startApolloServer = async () => {
   app.use('/graphql', expressMiddleware(server));
 
   db.once('open', () => {
-    app.listen(PORT, () => {
+    app.listen(PORT, '127.0.0.1', () => {
       console.log(`API server running on port ${PORT}!`);
       console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
     });

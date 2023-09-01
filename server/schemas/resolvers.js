@@ -7,6 +7,10 @@ const resolvers = {
     users: async () => {
       return User.find();
     },
+    loans: async () => {
+      return Loan.find();
+    },
+    
     user: async (parent, {userId}) => {
         console.log(`Requested User ID => `+ userId)
       return User.findOne({ _id: userId })
@@ -44,32 +48,9 @@ const resolvers = {
 
       return { token, user };
     },
-    addLoan: async (parent, { loanText, loanAuthor }) => {
-      return Loan.create({ loanText, loanAuthor });
+    saveLoan: async (parent, { loanId, totalLoanAmount, loanTerm, interest, loanPrinciple, depositAmount, createdAt, monthlyPayment }) => {
+      return Loan.create({ loanId, totalLoanAmount, loanTerm, interest, loanPrinciple, depositAmount, createdAt, monthlyPayment });
     },
-    addComment: async (parent, { loanId, commentText }) => {
-      return Loan.findOneAndUpdate(
-        { _id: loanId },
-        {
-          $addToSet: { comments: { commentText } },
-        },
-        {
-          new: true,
-          runValidators: true,
-        }
-      );
-    },
-    updateLoan: async (parent, { loanId, loanDepositAmount }) => {
-      return Loan.findOneAndUpdate(
-        { _id: loanId },
-        { $set: { loanDepositAmount } },
-        {
-          new: true,
-          runValidators: true,
-        }
-      );
-    },
-    
     removeLoan: async (parent, { loanId }) => {
       return Loan.findOneAndDelete({ _id: loanId });
     },

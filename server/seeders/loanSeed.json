@@ -1,0 +1,38 @@
+[
+  {
+    "loanTerm": 36,
+    "interestRate": 4.5,
+    "loanPrinciple": 422,
+    "depositAmount": 0
+  },
+  {
+    "loanTerm": 24,
+    "interestRate": 5.5,
+    "loanPrinciple": 890,
+    "depositAmount": 0
+  },
+  {
+    "loanTerm": 12,
+    "interestRate": 6.5,
+    "loanPrinciple": 1402.5,
+    "depositAmount": 0
+  },
+  {
+    "loanTerm": 60,
+    "interestRate": 5,
+    "loanPrinciple": 7500,
+    "depositAmount": 500
+  },
+  {
+    "loanTerm": 30,
+    "interestRate": 3.5,
+    "loanPrinciple": 175000,
+    "depositAmount": 2083
+  },
+  {
+    "loanTerm": 12,
+    "interestRate": 5,
+    "loanPrinciple": 500000,
+    "depositAmount": 0
+  }
+]

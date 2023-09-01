@@ -1,13 +1,19 @@
 const db = require('../config/connection');
-const { Loan } = require('../models');
-const loanSeeds = require('./loanSeed');
+const { Loan, User } = require('../models');
+const loanSeed = require('./loanSeed.json');
+const userSeed = require('./userSeed.json')
 const cleanDB = require('./cleanDB');
+
 
 db.once('open', async () => {
   await cleanDB('Loan', 'loans');
 
-  await Loan.create(loanSeeds);
+  await cleanDB('User', 'users');
+  
+  await Loan.create(loanSeed);
 
-  console.log('all done!');
+  await User.create(userSeed);
+
+  console.log(`${loanSeed.length} Loans created & ${userSeed.length} Users have been seeded!`);
   process.exit(0);
 });
