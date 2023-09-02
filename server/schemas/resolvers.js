@@ -48,8 +48,18 @@ const resolvers = {
 
       return { token, user };
     },
-    saveLoan: async (parent, { loanId, totalLoanAmount, loanTerm, interest, loanPrinciple, depositAmount, createdAt, monthlyPayment }) => {
-      return Loan.create({ loanId, totalLoanAmount, loanTerm, interest, loanPrinciple, depositAmount, createdAt, monthlyPayment });
+    saveLoan: async (parent, { totalInterest, totalLoanAmount, loanTerm, interestRate, loanPrinciple, depositAmount, createdAt}, context) => {
+      if (loanPrinciple) {
+        return User.findOneAndUpdate(
+           { _id: context.user._id },
+           {$addToSet: {
+             savedLoans: {totalInterest, totalLoanAmount, loanTerm, interestRate, loanPrinciple, depositAmount, createdAt}
+             }},
+           {new: true}
+         ); 
+       }
+       throw AuthenticationError;
+       ('You need to be logged in!');
     },
     removeLoan: async (parent, { loanId }) => {
       return Loan.findOneAndDelete({ _id: loanId });

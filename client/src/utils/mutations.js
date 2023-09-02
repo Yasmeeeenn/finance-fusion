@@ -25,22 +25,22 @@ export const ADD_USER = gql`
 `;
 //edit
 export const SAVE_LOAN = gql`
-mutation saveLoan($totalInterest: Float!, $totalLoanAmount: Float!, $loanTerm: Int!, $interestRate: Float!, $loanPrinciple: Float!, $depositAmount: Float!, $createdAt: String) {
- saveLoan(totalInterest: $totalInterest, totalLoanAmount: $totalLoanAmount, loanTerm: $loanTerm, interestRate: $interestRate, loanPrinciple: $loanPrinciple, depositAmount: $depositAmount, createdAt: $createdAt) {
-   username
-   savedLoans {
-        totalLoanAmount
-        totalInterest
-        loanPrinciple
-        loanTerm
-        depositAmount
-        interestRate
-        createdAt
-        _id
-      }
-      loanCount
-      email
+mutation SaveLoan($totalLoanAmount: Float!, $loanTerm: Int!, $interestRate: Float!, $totalInterest: Float!, $loanPrinciple: Float!, $depositAmount: Float, $createdAt: String) {
+  saveLoan(totalLoanAmount: $totalLoanAmount, loanTerm: $loanTerm, interestRate: $interestRate, totalInterest: $totalInterest, loanPrinciple: $loanPrinciple, depositAmount: $depositAmount, createdAt: $createdAt) {
+    _id
+    username
+    email
+    password
+    loanCount
+    savedLoans {
       _id
+      totalLoanAmount
+      loanTerm
+      totalInterest
+      loanPrinciple
+      interestRate
+      depositAmount
+      createdAt
     }
   }
 }
@@ -50,20 +50,20 @@ mutation saveLoan($totalInterest: Float!, $totalLoanAmount: Float!, $loanTerm: I
 export const REMOVE_LOAN = gql`
 mutation RemoveLoan($loanId: ID!) {
   removeLoan(loanId: $loanId) {
+    _id
     username
+    email
+    password
+    loanCount
     savedLoans {
-      totalLoanAmount
+      createdAt
+      depositAmount
       totalInterest
+      totalLoanAmount
+      _id
       loanTerm
       interestRate
       loanPrinciple
-      depositAmount
-      createdAt
-      _id
-    }
-      loanCount
-      email
-      _id
     }
   }
 }

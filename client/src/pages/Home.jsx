@@ -1,6 +1,4 @@
-import { useQuery } from '@apollo/client';
-import LoginPage from './LoginPage';
-
+import { useQuery , useState } from 'react';
 
 const Home = () => {
   const [formState, setFormState] = useState({
