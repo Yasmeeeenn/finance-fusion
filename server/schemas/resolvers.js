@@ -15,11 +15,11 @@ const resolvers = {
         console.log(`Requested User ID => `+ userId)
       return User.findOne({ _id: userId })
       .select('-__v')
-      .populate('savedBooks');
+      .populate('savedLoans');
     },
     me: async (parent, args, context) => {
         if (context.user) {
-          return User.findOne({ _id: context.user._id }).populate('savedBooks');
+          return User.findOne({ _id: context.user._id }).populate('savedLoans');
         }
         throw AuthenticationError;
       },

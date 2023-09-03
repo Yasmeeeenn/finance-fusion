@@ -1,31 +1,57 @@
 import { gql } from '@apollo/client';
 
 export const LOGIN_USER = gql`
-  mutation login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      token
-      user {
+mutation login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    token
+    user {
+      _id
+      username
+      email
+      password
+      loanCount
+      savedLoans {
         _id
-        username
+        totalLoanAmount
+        loanTerm
+        totalInterest
+        loanPrinciple
+        interestRate
+        depositAmount
+        createdAt
       }
     }
   }
+}
 `;
 
 export const ADD_USER = gql`
-  mutation addUser($username: String!, $email: String!, $password: String!) {
-    addUser(username: $username, email: $email, password: $password) {
-      token
-      user {
+mutation addUser($username: String!, $email: String!, $password: String!) {
+  addUser(username: $username, email: $email, password: $password) {
+    token
+    user {
+      _id
+      username
+      email
+      password
+      loanCount
+      savedLoans {
         _id
-        username
+        loanTerm
+        interestRate
+        totalLoanAmount
+        totalInterest
+        loanPrinciple
+        depositAmount
+        createdAt
       }
     }
   }
+}
 `;
 //edit
 export const SAVE_LOAN = gql`
-mutation SaveLoan($totalLoanAmount: Float!, $loanTerm: Int!, $interestRate: Float!, $totalInterest: Float!, $loanPrinciple: Float!, $depositAmount: Float, $createdAt: String) {
+mutation saveLoan($totalLoanAmount: Float!, $loanTerm: Int!, $interestRate: Float!, $totalInterest: Float!, $loanPrinciple: Float!, $depositAmount: Float, $createdAt: String) {
   saveLoan(totalLoanAmount: $totalLoanAmount, loanTerm: $loanTerm, interestRate: $interestRate, totalInterest: $totalInterest, loanPrinciple: $loanPrinciple, depositAmount: $depositAmount, createdAt: $createdAt) {
     _id
     username
@@ -48,7 +74,7 @@ mutation SaveLoan($totalLoanAmount: Float!, $loanTerm: Int!, $interestRate: Floa
 
 //edit
 export const REMOVE_LOAN = gql`
-mutation RemoveLoan($loanId: ID!) {
+mutation removeLoan($loanId: ID!) {
   removeLoan(loanId: $loanId) {
     _id
     username
