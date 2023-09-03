@@ -15,7 +15,7 @@ mutation login($email: String!, $password: String!) {
         totalLoanAmount
         loanTerm
         totalInterest
-        loanPrinciple
+        loanPrincipal
         interestRate
         depositAmount
         createdAt
@@ -41,7 +41,7 @@ mutation addUser($username: String!, $email: String!, $password: String!) {
         interestRate
         totalLoanAmount
         totalInterest
-        loanPrinciple
+        loanPrincipal
         depositAmount
         createdAt
       }
