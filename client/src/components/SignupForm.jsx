@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
+import { getEnterLeaveForKind } from 'graphql';
 
 const SignUpForm = () => {
   const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
@@ -24,9 +25,8 @@ const SignUpForm = () => {
       event.preventDefault();
       event.stopPropagation();
     }
-
+    console.log(email, password, username)
     try {
-      // const response = await createUser(userFormData);
       const {data} = await addUser({
         variables: {email, password, username}
       });

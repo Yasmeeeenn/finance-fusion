@@ -30,7 +30,9 @@ const startApolloServer = async () => {
     });
   }
   
-  app.use('/graphql', expressMiddleware(server));
+  app.use('/graphql', expressMiddleware(server, {
+    context: authMiddleware
+  }));
 
   db.once('open', () => {
     app.listen(PORT, '127.0.0.1', () => {
