@@ -1704,3 +1704,11 @@ label form [type='radio'] {
     align-content: center;
   }
 }
+
+.home {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.loan-fields {
+  font-size: 2rem;
+}

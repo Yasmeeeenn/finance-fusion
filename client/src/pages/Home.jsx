@@ -3,12 +3,11 @@ import { useState , useMutation } from 'react';
 const Home = () => {
   const [formState, setFormState] = useState({
         loanTitle: '',
-        loanAmount: '',
+        loanPrincipal: '',
         interestRate: '',
-        downPayment: '',
-        loanMonths: '',
-        monthlyPayments: '',
-        totalAmount: '',
+        depositAmount: '',
+        loanTerm: '',
+        monthlyPayment: '',
       });
       const [characterCount, setCharacterCount] = useState(0);
 
@@ -22,12 +21,11 @@ const Home = () => {
 
           setFormState({
             loanTitle: '',
-            loanAmount: '',
+            loanPrincipal: '',
             interestRate: '',
-            downPayment: '',
-            loanMonths: '',
-            monthlyPayments: '',
-            totalAmount: '',
+            depositAmount: '',
+            loanTerm: '',
+            monthlyPayment: '',
           });
         } catch (err) {
           console.error(err);
@@ -37,7 +35,7 @@ const Home = () => {
       const handleChange = (event) => {
         const { name, value } = event.target;
 
-        if (name === 'loanAmount' || name === 'interestRate') {
+        if (name === 'loanTerm' || name === 'interestRate') {
           // Handle calculations for monthlyPayments and totalAmount
           // You need to implement the calculation logic here
         }
@@ -46,14 +44,16 @@ const Home = () => {
       };
 
   return (
-    <div>
-    <h3>Loan Calculator</h3>
+    <div className='home'>
+    <h1>Loan Calculator</h1>
+    <p>🤓 ➕➗✖️🟰➖ ✨</p>
 
     <form
       className="flex-row justify-center justify-space-between-md align-center"
       onSubmit={handleFormSubmit}
     > 
       <div className="col-12"> 
+        <p className='loan-fields'>Title</p>
         <input
           name="loanTitle"
           placeholder="Title of Loan"
@@ -62,59 +62,53 @@ const Home = () => {
           onChange={handleChange}
         />
       </div>
-      <div className="col-12"> Amount
+      <div className="col-12"> 
+      <p className='loan-fields'>Loan Principal</p>
         <input
-          name="loanAmount"
-          placeholder="Loan Amount"
-          value={formState.loanAmount}
+          name="loanPrincipal"
+          placeholder="Principal Amount"
+          value={formState.loanPrincipal}
           className="form-input w-100"
           onChange={handleChange}
         />
       </div>
-      <div className="col-12"> Interest Rate
+      <div className="col-12"> 
+      <p className='loan-fields'>Interest Rate</p>
         <input
           name="interestRate"
           placeholder="Interest Rate"
           value={formState.interestRate}
           className="form-input w-100"
           onChange={handleChange}
-        /> Down Payment
+        /> 
       </div>
       <div className="col-12">
-
+      <p className='loan-fields'>Down Payment</p>
         <input
-          name="downPayment"
+          name="depositAmount"
           placeholder="Down Payment"
-          value={formState.downPayment}
+          value={formState.depositAmount}
           className="form-input w-100"
           onChange={handleChange}
-        /> Duration of Loan
+        /> 
       </div>
       <div className="col-12">
+      <p className='loan-fields'>Loan Term</p>
         <input
-          name="loanMonths"
-          placeholder="Months"
-          value={formState.loanMonths}
-          className="form-input w-100"
-          onChange={handleChange}
-        />
-        Payments
-      </div>
-      <div className="col-12">
-        <input
-          name="monthlyPayments"
-          placeholder="Payments"
-          value={formState.monthlyPayments}
+          name="loanTerm"
+          placeholder="Duration of Loan"
+          value={formState.loanTerm}
           className="form-input w-100"
           onChange={handleChange}
         />
+        
       </div>
       <div className="col-12">
-        Amount that will be paid
+      <p className='loan-fields'>Payments</p>
         <input
-          name="totalAmount"
-          placeholder="Total Amount"
-          value={formState.totalAmount}
+          name="monthlyPayment"
+          placeholder="Monthly Payments"
+          value={formState.monthlyPayment}
           className="form-input w-100"
           onChange={handleChange}
         />
