@@ -14,6 +14,6 @@ db.once('open', async () => {
 
   await User.create(userSeed);
 
-  console.log(`${loanSeed.length} Loans created & ${userSeed.length} Users have been seeded!`);
+  console.log(`\n ${loanSeed.length} Loans created & ${userSeed.length} Users have been seeded!`);
   process.exit(0);
 });
