@@ -11,15 +11,10 @@ const AppNavbar = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <>  <div className = "Navbar"   >
-    <button onClick={()=> setdisplay ("login")}>Login</button>
-    <button onClick={()=> setdisplay ("home")}>Home</button>
-    <button onClick={()=> setdisplay ("savedLoans")}>Saved Loans</button>
-
-  </div>
+    <>  
       <Navbar bg='dark' variant='dark' expand='lg'>
         <Container fluid>
-          <Navbar.Brand as={Link} to='/'>
+          <Navbar.Brand as={Link} to='/'> 
             Loan Calculator
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />

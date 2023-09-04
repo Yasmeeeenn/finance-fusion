@@ -918,7 +918,7 @@ a:hover {
 
 /* BACKGROUND UTILS */
 .bg-primary {
-  background-color: white !important;
+  background-color: rgb(34, 149, 48) !important;
 }
 
 .bg-info {
@@ -934,7 +934,7 @@ a:hover {
 }
 
 .bg-dark {
-  background-color: #1a1a1a !important;
+  background-color: hsl(126, 78%, 11%) !important;
 }
 
 .bg-white {
