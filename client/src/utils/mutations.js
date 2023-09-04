@@ -51,8 +51,8 @@ mutation addUser($username: String!, $email: String!, $password: String!) {
 `;
 //edit
 export const SAVE_LOAN = gql`
-mutation saveLoan($totalLoanAmount: Float!, $loanTerm: Int!, $interestRate: Float!, $totalInterest: Float!, $loanPrinciple: Float!, $depositAmount: Float, $createdAt: String) {
-  saveLoan(totalLoanAmount: $totalLoanAmount, loanTerm: $loanTerm, interestRate: $interestRate, totalInterest: $totalInterest, loanPrinciple: $loanPrinciple, depositAmount: $depositAmount, createdAt: $createdAt) {
+mutation SaveLoan($loanTerm: Int!, $interestRate: Float!, $loanPrincipal: Float!, $loanTitle: String, $monthlyPayment: Float, $depositAmount: Float) {
+  saveLoan(loanTerm: $loanTerm, interestRate: $interestRate, loanPrincipal: $loanPrincipal, loanTitle: $loanTitle, monthlyPayment: $monthlyPayment, depositAmount: $depositAmount) {
     _id
     username
     email
@@ -61,10 +61,12 @@ mutation saveLoan($totalLoanAmount: Float!, $loanTerm: Int!, $interestRate: Floa
     savedLoans {
       _id
       totalLoanAmount
+      loanTitle
       loanTerm
-      totalInterest
-      loanPrinciple
       interestRate
+      totalInterest
+      loanPrincipal
+      monthlyPayment
       depositAmount
       createdAt
     }

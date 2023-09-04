@@ -1,4 +1,7 @@
-import { useState , useMutation } from 'react';
+import { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { SAVE_LOAN } from '../utils/mutations';
+
 
 const Home = () => {
   const [formState, setFormState] = useState({
@@ -10,12 +13,13 @@ const Home = () => {
         monthlyPayment: '',
       });
       const [characterCount, setCharacterCount] = useState(0);
+      const [saveLoan] = useMutation(SAVE_LOAN)
 
       const handleFormSubmit = async (event) => {
         event.preventDefault();
 
         try {
-          const { data } = await addThought({
+          const { data } = await saveLoan({
             variables: { ...formState },
           });
 
@@ -35,12 +39,14 @@ const Home = () => {
       const handleChange = (event) => {
         const { name, value } = event.target;
 
-        if (name === 'loanTerm' || name === 'interestRate') {
-          // Handle calculations for monthlyPayments and totalAmount
-          // You need to implement the calculation logic here
-        }
+        const floatValue = !isNaN(value) ? parseFloat(value) : value;
 
-        setFormState({ ...formState, [name]: value });
+        // if (name === 'loanTerm' || name === 'interestRate') {
+        //   // Handle calculations for monthlyPayments and totalAmount
+        //   // You need to implement the calculation logic here
+        // }
+
+        setFormState({ ...formState, [name]: floatValue });
       };
 
   return (

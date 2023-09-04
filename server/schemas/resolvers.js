@@ -48,8 +48,8 @@ const resolvers = {
 
       return { token, user };
     },
-    saveLoan: async (parent, { loanTerm, interestRate, loanPrincipal, depositAmount, monthlyPayment , loanTitle }, context) => {
-      if (loanPrinciple) {
+    saveLoan: async (parent, { loanTerm, interestRate, loanPrincipal, depositAmount, monthlyPayment , loanTitle, totalLoanAmount, totalInterest }, context) => {
+      if (loanPrincipal) {
         return User.findOneAndUpdate(
            { _id: context.user._id },
            {$addToSet: {
