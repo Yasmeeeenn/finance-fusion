@@ -97,6 +97,7 @@ const resolvers = {
       // Add the new Loan's data to the user's savedLoans array
       user.savedLoans.push({
         _id: newLoan._id,
+        loanId: newLoan.loanId,
         loanTerm,
         interestRate,
         loanPrincipal,
@@ -114,28 +115,24 @@ const resolvers = {
       // Return the updated user object, including the newly added loan
       return user;
     },
-    removeLoan: async (parent, { loanId }, context) => {
-      if (loanId) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          {
-            $pull: {
-              savedLoans: {
-                _id: loanId,
-              },
-            },
-          },
-          { new: true }
-        );
-    
-        if (!updatedUser) {
-          throw new Error("User not found"); 
-        }
-        console.log(updatedUser)
-        return updatedUser;
-      } else {
-        throw new Error("Invalid loanId");
+    removeLoan: async (parent, args, context) => {
+      const user = context.user;
+
+      if (!user) {
+        throw new Error("User not found");
       }
+    
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: user._id },
+        { $pull: { savedLoans: {loanId: args._id } } },
+        { new: true }
+      );
+    
+      if (!updatedUser) {
+        throw new Error("User not found");
+      }
+    
+      return updatedUser;
     },
   },
 };

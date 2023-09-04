@@ -9,7 +9,7 @@ import {
 
 import Auth from '../utils/auth';
 import { useQuery , useMutation } from '@apollo/client';
-import { GET_ME , GET_LOAN } from '../utils/queries';
+import { GET_ME } from '../utils/queries';
 import { saveLoanIds , getSavedLoanIds, removeLoanId } from '../utils/localStorage';
 import { REMOVE_LOAN } from '../utils/mutations';
 
@@ -46,7 +46,6 @@ const SavedLoans = () => {
 
   const handleDeleteLoan = async (loanId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-    
     if (!token) {
       console.log('No Token')
       return false;
@@ -57,8 +56,8 @@ const SavedLoans = () => {
         variables: {loanId}
       })
 
+      
       console.log(data)
-
       removeLoanId(loanId);
     } catch (err) {
       console.error(err);
@@ -82,7 +81,7 @@ const SavedLoans = () => {
           {userData.savedLoans.map((loan) => {
             return (
               <Col md="4">
-                <Card key={loan.loanId} border='dark'>
+                <Card key={loan._id} border='dark'>
                   <Card.Body>
                     <Card.Title>Loan: {loan.loanTitle}</Card.Title>
                     <Card.Text>
@@ -102,8 +101,8 @@ const SavedLoans = () => {
                       <br />
                       Created On: {loan.createdAt}
                     </Card.Text>
-                    <Button className='btn-block btn-danger' onClick={() => handleDeleteLoan(loan._id)}>
-                      Delete this Loan!
+                    <Button className='btn-block btn-danger' onClick={() => handleDeleteLoan(loan.loanId)}>
+                      Remove this Loan
                     </Button>
                   </Card.Body>
                 </Card>
