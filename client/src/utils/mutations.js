@@ -13,12 +13,15 @@ mutation login($email: String!, $password: String!) {
       savedLoans {
         _id
         totalLoanAmount
+        loanTitle
         loanTerm
+        interestRate
         totalInterest
         loanPrincipal
-        interestRate
+        monthlyPayment
         depositAmount
         createdAt
+        loanId
       }
     }
   }
@@ -37,13 +40,16 @@ mutation addUser($username: String!, $email: String!, $password: String!) {
       loanCount
       savedLoans {
         _id
+        totalLoanAmount
+        loanTitle
         loanTerm
         interestRate
-        totalLoanAmount
         totalInterest
         loanPrincipal
+        monthlyPayment
         depositAmount
         createdAt
+        loanId
       }
     }
   }
@@ -68,6 +74,7 @@ mutation saveLoan($loanTerm: Int!, $interestRate: Float!, $loanPrincipal: Float!
       monthlyPayment
       depositAmount
       createdAt
+      loanId
     }
   }
 }
@@ -88,9 +95,12 @@ mutation removeLoan($loanId: ID!) {
       totalInterest
       totalLoanAmount
       _id
+      loanTitle
       loanTerm
       interestRate
       loanPrincipal
+      loanId
+      monthlyPayment
     }
   }
 }

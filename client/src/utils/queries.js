@@ -18,25 +18,10 @@ query Me {
       loanPrincipal
       depositAmount
       createdAt
+      loanId
     }
   }
 }
 `;
 
-export const GET_LOAN = gql`
-query loan($loanId: ID!) {
-  loan(loanId: $loanId) {
-    _id
-    totalLoanAmount
-    loanTitle
-    loanTerm
-    interestRate
-    totalInterest
-    loanPrincipal
-    monthlyPayment
-    depositAmount
-    createdAt
-  }
-}
-`;
 

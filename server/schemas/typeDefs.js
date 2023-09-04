@@ -10,6 +10,7 @@ const typeDefs = `
 
   type Loan {
     _id: ID
+    loanId: String
     totalLoanAmount: Float
     loanTitle: String
     loanTerm: Int
