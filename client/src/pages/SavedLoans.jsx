@@ -79,8 +79,10 @@ const SavedLoans = () => {
               <Col md="4">
                 <Card key={loan.loanId} border='dark'>
                   <Card.Body>
-                    <Card.Title>{loan.loanTitle ? loan.loanTitle : "Loan Title Not Available"}{console.log(loan.loanTitle)}</Card.Title>
+                    <Card.Title>{loan.loanTitle ? loan.loanTitle : ""}{console.log(loan.loanTitle)}</Card.Title>
                     <Card.Text>
+                      Loan Principal: {loan.loanPrincipal}
+                      <br />
                       Total Loan Amount: {loan.totalLoanAmount}
                       <br />
                       Loan Term: {loan.loanTerm}
