@@ -13,6 +13,8 @@ const Home = () => {
       });
       const [characterCount, setCharacterCount] = useState(0);
       const [saveLoan] = useMutation(SAVE_LOAN)
+      const [successMessage, setSuccessMessage] = useState(null); 
+      const [failureMessage, setFailureMessage] = useState(null); 
 
       const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -29,8 +31,10 @@ const Home = () => {
             depositAmount: '',
             loanTerm: '',
           });
+          setSuccessMessage('Loan saved successfully!');
         } catch (err) {
           console.error(err);
+          setFailureMessage('Request failed. Please check that you are logged in correctly and all fields are correctly completed.')
         }
       };
 
@@ -113,6 +117,16 @@ const Home = () => {
         </button>
       </div>
     </form>
+    {successMessage && (
+        <div className="success-message">
+          <p>{successMessage}</p>
+        </div>
+      )}
+    {failureMessage && (
+      <div className="failure-message">
+        <p>{failureMessage}</p>
+      </div>
+    )}
   </div>
 );
 };

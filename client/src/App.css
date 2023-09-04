@@ -1712,3 +1712,25 @@ label form [type='radio'] {
 .loan-fields {
   font-size: 2rem;
 }
+
+.success-message {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+
+  font-size: 25px;
+  font-weight: bold;
+  color: #2dbd2de7;
+  font-style: italic;
+}
+
+.failure-message {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+
+  font-size: 25px;
+  font-weight: bold;
+  color: #bd372de7;
+  font-style: italic;
+}
