@@ -38,35 +38,6 @@ const loanSchema = new Schema({
   },
 });
 
-loanSchema.pre('save', function (next) {
-  const interestRateDecimal = this.interestRate / 100;
-  const monthlyInterestRate = interestRateDecimal / 12;
-
-  // Calculate the total interest
-  let remainingLoanBalance = this.loanPrincipal;
-  let totalInterestPaid = 0;
-
-  for (let paymentNumber = 1; paymentNumber <= this.loanTerm; paymentNumber++) {
-    const interestPayment = remainingLoanBalance * monthlyInterestRate;
-    const principalPayment = this.monthlyPayment - interestPayment;
-
-    totalInterestPaid += interestPayment;
-    remainingLoanBalance -= principalPayment;
-  }
-
-  this.totalInterest = parseFloat(totalInterestPaid.toFixed(2));
-  this.totalLoanAmount = parseFloat((this.totalInterest + this.loanPrincipal).toFixed(2));
-
-  // Round the monthly payment to two decimal places
-  this.monthlyPayment = parseFloat(this.monthlyPayment.toFixed(2));
-  
-  console.log(`\n`+'Loan Principal: '+`$`, this.loanPrincipal)
-  console.log('Calculated Total Interest: '+`$`, this.totalInterest);
-  console.log('Total Loan Amount: '+`$`, this.totalLoanAmount);;
-  
-  next();
-  });
-
 const Loan = model('Loan', loanSchema);
 
 module.exports = Loan;
