@@ -10,7 +10,6 @@ const Home = () => {
         interestRate: '',
         depositAmount: '',
         loanTerm: '',
-        monthlyPayment: '',
       });
       const [characterCount, setCharacterCount] = useState(0);
       const [saveLoan] = useMutation(SAVE_LOAN)
@@ -29,7 +28,6 @@ const Home = () => {
             interestRate: '',
             depositAmount: '',
             loanTerm: '',
-            monthlyPayment: '',
           });
         } catch (err) {
           console.error(err);
@@ -108,16 +106,6 @@ const Home = () => {
           onChange={handleChange}
         />
         
-      </div>
-      <div className="col-12">
-      <p className='loan-fields'>Payments</p>
-        <input
-          name="monthlyPayment"
-          placeholder="Monthly Payments"
-          value={formState.monthlyPayment}
-          className="form-input w-100"
-          onChange={handleChange}
-        />
       </div>
       <div className="col-12">
         <button className="btn btn-primary btn-block py-3" type="submit">
