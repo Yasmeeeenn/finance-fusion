@@ -1183,6 +1183,23 @@ label form [type='radio'] {
   flex-wrap: wrap;
 }
 
+.calculator {
+  margin: 50px;
+}
+
+.login {
+  margin: 50px;
+  display: flex;
+
+  justify-content: space-between;
+}
+
+body {
+
+background: rgb(119, 187, 125);
+
+}
+
 .flex-column {
   display: flex;
   flex-direction: column;
