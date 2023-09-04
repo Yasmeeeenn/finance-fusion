@@ -18,7 +18,7 @@ const AppNavbar = () => {
             Loan Calculator
           </Navbar.Brand>
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
-            <Nav className='ml-auto d-flex'>
+            <Nav className='ml-auto d-flex '>
               {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to='/saved'>
