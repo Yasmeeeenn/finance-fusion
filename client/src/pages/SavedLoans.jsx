@@ -9,7 +9,7 @@ import {
 
 import Auth from '../utils/auth';
 import { useQuery , useMutation } from '@apollo/client';
-import { GET_ME } from '../utils/queries';
+import { GET_ME , GET_LOAN } from '../utils/queries';
 import { saveLoanIds , getSavedLoanIds, removeLoanId } from '../utils/localStorage';
 import { REMOVE_LOAN } from '../utils/mutations';
 
@@ -17,10 +17,22 @@ const SavedLoans = () => {
   const { username } = useParams();
   const { loading, error, data } = useQuery(GET_ME);
   const [removeLoan] = useMutation(REMOVE_LOAN)
+  
+  
   // if data isn't here yet, say so
   if (loading) {
     return <h2>LOADING...</h2>;
   }
+
+  const {me} = data
+  console.log(me.loanCount)
+
+  me.savedLoans.map((loan) => { 
+    console.log(loan)
+  })
+    
+  console.log(me)
+  let userData = me 
 
   if (error) {
     console.error(error);
@@ -31,12 +43,6 @@ const SavedLoans = () => {
       </div>
     );
   }
-
-  const {me} = data
-  console.log(me)
-  let userData = me
-
-  
 
   const handleDeleteLoan = async (loanId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -78,21 +84,25 @@ const SavedLoans = () => {
               <Col md="4">
                 <Card key={loan.loanId} border='dark'>
                   <Card.Body>
-                    <Card.Title>{loan.loanPrinciple}</Card.Title>
+                    <Card.Title>Loan: {loan.loanTitle}</Card.Title>
                     <Card.Text>
-                      Total Loan Amount: {loan.totalLoanAmount}
+                      Initial Principal Amount: ${loan.loanPrincipal}
                       <br />
-                      Loan Term: {loan.loanTerm}
+                      Deposit Amount: ${loan.depositAmount}
                       <br />
-                      Interest Rate: {loan.interestRate}
+                      Loan Term: {loan.loanTerm} months
                       <br />
-                      Total Interest: {loan.totalInterest}
+                      Interest Rate: {loan.interestRate}%
                       <br />
-                      Deposit Amount: {loan.depositAmount}
+                      Monthly Payment: ${Math.round(loan.monthlyPayment*100) / 100}
                       <br />
-                      Created At: {loan.createdAt}
+                      Total Interest Paid: ${loan.totalInterest}
+                      <br />
+                      Total Loan Amount: ${loan.totalLoanAmount}
+                      <br />
+                      Created On: {loan.createdAt}
                     </Card.Text>
-                    <Button className='btn-block btn-danger' onClick={() => handleDeleteLoan(loan.loanId)}>
+                    <Button className='btn-block btn-danger' onClick={() => handleDeleteLoan(loan._id)}>
                       Delete this Loan!
                     </Button>
                   </Card.Body>

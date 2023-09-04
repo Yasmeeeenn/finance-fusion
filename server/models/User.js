@@ -45,7 +45,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-userSchema.virtual('numberOfLoans').get(function () {
+userSchema.virtual('loanCount').get(function () {
   return this.savedLoans.length;
 });
 

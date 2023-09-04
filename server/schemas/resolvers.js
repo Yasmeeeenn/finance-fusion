@@ -73,35 +73,69 @@ const resolvers = {
     },
     saveLoan: async (parent, { loanTerm, interestRate, loanPrincipal, loanTitle, depositAmount }, context) => {
       if (!loanTitle) {
-        const loanTitle =  'Default Title'
+        loanTitle = 'Default Title';
       }
     
       // Calculate the total interest and total loan amount based on the default values
       const { totalInterest, totalLoanAmount, monthlyPayment } = calculateLoan(loanPrincipal, loanTerm, interestRate);
     
-      const updatedUser = await User.findOneAndUpdate(
-        { _id: context.user._id },
-        {
-          $addToSet: {
-            savedLoans: {
-              loanTerm,
-              interestRate,
-              loanPrincipal,
-              monthlyPayment,
-              loanTitle,
-              depositAmount,
-              totalInterest,
-              totalLoanAmount,
+      // Create a new Loan document
+      const newLoan = await Loan.create({
+        loanTerm,
+        interestRate,
+        loanPrincipal,
+        monthlyPayment,
+        loanTitle,
+        depositAmount,
+        totalInterest,
+        totalLoanAmount,
+      });
+    
+      // Retrieve the user
+      const user = await User.findOne({ _id: context.user._id });
+    
+      // Add the new Loan's data to the user's savedLoans array
+      user.savedLoans.push({
+        _id: newLoan._id,
+        loanTerm,
+        interestRate,
+        loanPrincipal,
+        monthlyPayment,
+        loanTitle,
+        depositAmount,
+        totalInterest,
+        totalLoanAmount,
+        createdAt: newLoan.createdAt,
+      });
+    
+      // Save the user document with the new Loan
+      await user.save();
+    
+      // Return the updated user object, including the newly added loan
+      return user;
+    },
+    removeLoan: async (parent, { loanId }, context) => {
+      if (loanId) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          {
+            $pull: {
+              savedLoans: {
+                _id: loanId,
+              },
             },
           },
-        },
-        { new: true }
-      );
+          { new: true }
+        );
     
-      return updatedUser;
-    },
-    removeLoan: async (parent, { loanId }) => {
-      return Loan.findOneAndDelete({ _id: loanId });
+        if (!updatedUser) {
+          throw new Error("User not found"); 
+        }
+        console.log(updatedUser)
+        return updatedUser;
+      } else {
+        throw new Error("Invalid loanId");
+      }
     },
   },
 };
