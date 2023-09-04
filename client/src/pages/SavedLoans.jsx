@@ -72,7 +72,7 @@ const SavedLoans = () => {
         </Container>
       </div>
       <Container>
-        <h2 className='pt-5'>
+        <h2 className='pt-5 saved'>
           {userData.savedLoans.length
             ? `Viewing ${userData.savedLoans.length} saved ${userData.savedLoans.length === 1 ? 'loan' : 'loans'}:`
             : 'You have no saved loans!'}
@@ -81,9 +81,9 @@ const SavedLoans = () => {
           {userData.savedLoans.map((loan) => {
             return (
               <Col md="4">
-                <Card key={loan._id} border='dark'>
+                <Card key={loan._id} border='dark' className='saved-loans'>
                   <Card.Body>
-                    <Card.Title>Loan: {loan.loanTitle}</Card.Title>
+                    <Card.Title>{loan.loanTitle}</Card.Title>
                     <Card.Text>
                       Initial Principal Amount: ${loan.loanPrincipal}
                       <br />
@@ -95,9 +95,9 @@ const SavedLoans = () => {
                       <br />
                       Monthly Payment: ${Math.round(loan.monthlyPayment*100) / 100}
                       <br />
-                      Total Interest Paid: ${loan.totalInterest}
+                      Total Interest Paid: ${Math.round(loan.totalInterest*100) / 100}
                       <br />
-                      Total Loan Amount: ${loan.totalLoanAmount}
+                      Total Loan Amount: ${Math.round(loan.totalLoanAmount*100) / 100} 
                       <br />
                       Created On: {loan.createdAt}
                     </Card.Text>

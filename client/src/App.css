@@ -1085,6 +1085,12 @@ a:hover {
   border: 1px solid #1a1a1a;
   margin-bottom: 1rem;
 }
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .card .card-header {
   padding: 0.375rem;
@@ -1750,4 +1756,18 @@ background: rgb(119, 187, 125);
   font-weight: bold;
   color: #bd372de7;
   font-style: italic;
+}
+
+.saved-loans {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 3rem;
+  
+}
+
+.saved {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
