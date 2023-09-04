@@ -15,6 +15,10 @@
     flex-direction: column;
     gap: 10px;
   }
+
+  button { color: rgb(177, 33, 33);
+margin: 12rem;
+  }
   
   .login-form input {
     padding: 8px;
