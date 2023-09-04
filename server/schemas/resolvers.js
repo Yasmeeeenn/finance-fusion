@@ -2,6 +2,29 @@ const { Loan } = require('../models');
 const { User } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
+const calculateLoan = (loanPrincipal, loanTerm, interestRate) => {
+  const interestRateDecimal = interestRate / 100;
+  const monthlyInterestRate = interestRateDecimal / 12;
+  const monthlyPayment = loanPrincipal * (monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -loanTerm)));
+
+  // Calculate the total interest
+  let remainingLoanBalance = loanPrincipal;
+  let totalInterestPaid = 0;
+
+  for (let paymentNumber = 1; paymentNumber <= loanTerm; paymentNumber++) {
+    const interestPayment = remainingLoanBalance * monthlyInterestRate;
+    const principalPayment = monthlyPayment - interestPayment;
+
+    totalInterestPaid += interestPayment;
+    remainingLoanBalance -= principalPayment;
+  }
+
+  const totalInterest = parseFloat(totalInterestPaid.toFixed(2));
+  const totalLoanAmount = parseFloat((totalInterest + loanPrincipal).toFixed(2));
+
+  return { totalInterest, totalLoanAmount, monthlyPayment };
+};
+
 const resolvers = {
   Query: {
     users: async () => {
@@ -48,18 +71,34 @@ const resolvers = {
 
       return { token, user };
     },
-    saveLoan: async (parent, { loanTerm, interestRate, loanPrincipal, depositAmount, monthlyPayment , loanTitle, totalLoanAmount, totalInterest }, context) => {
-      if (loanPrincipal) {
-        return User.findOneAndUpdate(
-           { _id: context.user._id },
-           {$addToSet: {
-             savedLoans: { loanTerm, interestRate, loanPrincipal, monthlyPayment, loanTitle, depositAmount }
-             }},
-           {new: true}
-         ); 
-       }
-       throw AuthenticationError;
-       ('You need to be logged in!');
+    saveLoan: async (parent, { loanTerm, interestRate, loanPrincipal, loanTitle, depositAmount }, context) => {
+      if (!loanTitle) {
+        const loanTitle =  'Default Title'
+      }
+    
+      // Calculate the total interest and total loan amount based on the default values
+      const { totalInterest, totalLoanAmount, monthlyPayment } = calculateLoan(loanPrincipal, loanTerm, interestRate);
+    
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: context.user._id },
+        {
+          $addToSet: {
+            savedLoans: {
+              loanTerm,
+              interestRate,
+              loanPrincipal,
+              monthlyPayment,
+              loanTitle,
+              depositAmount,
+              totalInterest,
+              totalLoanAmount,
+            },
+          },
+        },
+        { new: true }
+      );
+    
+      return updatedUser;
     },
     removeLoan: async (parent, { loanId }) => {
       return Loan.findOneAndDelete({ _id: loanId });
