@@ -37,13 +37,12 @@ const resolvers = {
     user: async (parent, {userId}) => {
         console.log(`Requested User ID => `+ userId)
       return User.findOne({ _id: userId })
-      .select('-__v')
-      .populate('savedLoans');
+      .select('-__v');
     },
     me: async (parent, args, context) => {
         if (context.user) {
           console.log(context.user)
-          return User.findOne({ _id: context.user._id }).populate('savedLoans');
+          return User.findOne({ _id: context.user._id });
         }
         throw AuthenticationError;
       },

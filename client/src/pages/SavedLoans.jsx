@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   Container,
@@ -14,11 +13,10 @@ import { GET_ME } from '../utils/queries';
 import { saveLoanIds , getSavedLoanIds, removeLoanId } from '../utils/localStorage';
 import { REMOVE_LOAN } from '../utils/mutations';
 
-const savedLoans = () => {
+const SavedLoans = () => {
   const { username } = useParams();
-  const { loading, error, data } = useQuery(GET_ME, {
-    variables: {username}
-  });
+  const { loading, error, data } = useQuery(GET_ME);
+  const [removeLoan] = useMutation(REMOVE_LOAN)
   // if data isn't here yet, say so
   if (loading) {
     return <h2>LOADING...</h2>;
@@ -38,7 +36,7 @@ const savedLoans = () => {
   console.log(me)
   let userData = me
 
-  const [removeLoan] = useMutation(REMOVE_LOAN)
+  
 
   const handleDeleteLoan = async (loanId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -108,4 +106,4 @@ const savedLoans = () => {
   );
 };
 
-export default savedLoans;
+export default SavedLoans;
