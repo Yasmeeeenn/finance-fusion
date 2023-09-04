@@ -74,11 +74,12 @@ const SavedLoans = () => {
         </h2>
         <Row>
           {userData.savedLoans.map((loan) => {
+              console.log("Loan Data:", loan);
             return (
               <Col md="4">
                 <Card key={loan.loanId} border='dark'>
                   <Card.Body>
-                    <Card.Title>{loan.loanPrinciple}</Card.Title>
+                    <Card.Title>{loan.loanTitle ? loan.loanTitle : "Loan Title Not Available"}{console.log(loan.loanTitle)}</Card.Title>
                     <Card.Text>
                       Total Loan Amount: {loan.totalLoanAmount}
                       <br />

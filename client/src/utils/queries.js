@@ -11,6 +11,7 @@ export const GET_ME = gql`
         totalLoanAmount
         totalInterest
         loanTerm
+        loanTitle
         loanPrincipal
         interestRate
         depositAmount

@@ -18,12 +18,12 @@ const Home = () => {
 
       const handleFormSubmit = async (event) => {
         event.preventDefault();
-
+        console.log("Form State:", formState);
         try {
           const { data } = await saveLoan({
             variables: { ...formState },
           });
-
+          
           setFormState({
             loanTitle: '',
             loanPrincipal: '',
