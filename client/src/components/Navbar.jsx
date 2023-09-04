@@ -17,7 +17,6 @@ const AppNavbar = () => {
           <Navbar.Brand as={Link} to='/'> 
             Loan Calculator
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
             <Nav className='ml-auto d-flex'>
               {Auth.loggedIn() ? (
@@ -25,7 +24,7 @@ const AppNavbar = () => {
                   <Nav.Link as={Link} to='/saved'>
                     See Your Loans
                   </Nav.Link>
-                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                  <Nav.Link onClick={Auth.logout}> Logout</Nav.Link>
                 </>
               ) : (
                 <Nav.Link onClick={() => setShowModal(true)}>Login or Sign Up</Nav.Link>

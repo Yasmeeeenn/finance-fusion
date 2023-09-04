@@ -19,19 +19,32 @@ const savedLoans = () => {
   const { loading, error, data } = useQuery(GET_ME, {
     variables: {username}
   });
-  const [removeLoan] = useMutation(REMOVE_LOAN)
   // if data isn't here yet, say so
   if (loading) {
     return <h2>LOADING...</h2>;
   }
+
+  if (error) {
+    console.error(error);
+    return (
+      <div>
+        <h2>Error loading data</h2>
+        <pre>{JSON.stringify(error, null, 2)}</pre>
+      </div>
+    );
+  }
+
   const {me} = data
   console.log(me)
   let userData = me
+
+  const [removeLoan] = useMutation(REMOVE_LOAN)
 
   const handleDeleteLoan = async (loanId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     
     if (!token) {
+      console.log('No Token')
       return false;
     }
 
@@ -41,7 +54,6 @@ const savedLoans = () => {
       })
 
       console.log(data)
-      let userData = data
 
       removeLoanId(loanId);
     } catch (err) {
@@ -70,12 +82,17 @@ const savedLoans = () => {
                   <Card.Body>
                     <Card.Title>{loan.loanPrinciple}</Card.Title>
                     <Card.Text>
-                        {loan.totalLoanAmount}
-                        {loan.loanTerm}
-                        {loan.interestRate}
-                        {loan.totalInterest}
-                        {loan.depositAmount}
-                        {loan.createdAt}
+                      Total Loan Amount: {loan.totalLoanAmount}
+                      <br />
+                      Loan Term: {loan.loanTerm}
+                      <br />
+                      Interest Rate: {loan.interestRate}
+                      <br />
+                      Total Interest: {loan.totalInterest}
+                      <br />
+                      Deposit Amount: {loan.depositAmount}
+                      <br />
+                      Created At: {loan.createdAt}
                     </Card.Text>
                     <Button className='btn-block btn-danger' onClick={() => handleDeleteLoan(loan.loanId)}>
                       Delete this Loan!
